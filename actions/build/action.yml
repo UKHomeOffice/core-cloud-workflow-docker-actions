@@ -62,5 +62,8 @@ runs:
       id: docker_build_exit_code
       shell: bash
       run: |
-        EXIT_CODE=$?
-        echo "exit_code=$EXIT_CODE" >> $GITHUB_OUTPUT
+        if [ "${{ steps.docker_build.conclusion }}" = "success" ]; then
+          echo "exit_code=0" >> $GITHUB_OUTPUT
+        else
+          echo "exit_code=1" >> $GITHUB_OUTPUT
+        fi

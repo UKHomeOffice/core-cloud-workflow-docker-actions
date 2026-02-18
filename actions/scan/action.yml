@@ -16,7 +16,8 @@ runs:
 
   steps:
     - name: Run Trivy vulnerability scanner
-      uses: aquasecurity/trivy-action@v0.34
+      id: trivy_scan
+      uses: aquasecurity/trivy-action@0.34.0
       with:
         image-ref: ${{ inputs.image }}
         exit-code: 1
@@ -25,5 +26,8 @@ runs:
       id: trivy_scan_exit_code
       shell: bash
       run: |
-        EXIT_CODE=$?
-        echo "exit_code=$EXIT_CODE" >> $GITHUB_OUTPUT
+        if [ "${{ steps.trivy_scan.conclusion }}" = "success" ]; then
+          echo "exit_code=0" >> $GITHUB_OUTPUT
+        else
+          echo "exit_code=1" >> $GITHUB_OUTPUT
+        fi
