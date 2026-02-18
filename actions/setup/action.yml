@@ -1,0 +1,12 @@
+name: Docker Setup
+description: "Set up Docker environment including QEMU and Buildx."
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2

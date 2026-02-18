@@ -1,0 +1,29 @@
+name: Docker Scan with Trivy
+description: "Scan a Docker image for vulnerabilities using Trivy and output the results in SARIF format."
+
+inputs:
+  image:
+    description: "Docker image to scan (e.g. my-image:latest)"
+    required: true
+
+outputs:
+  trivy_scan_exit_code:
+    description: "The exit code from the Trivy scan command"
+    value: ${{ steps.trivy_scan_exit_code.outputs.exit_code }}
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@v0.34
+      with:
+        image-ref: ${{ inputs.image }}
+        exit-code: 1
+
+    - name: Set Trivy scan exit code
+      id: trivy_scan_exit_code
+      shell: bash
+      run: |
+        EXIT_CODE=$?
+        echo "exit_code=$EXIT_CODE" >> $GITHUB_OUTPUT
