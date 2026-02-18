@@ -41,7 +41,7 @@ jobs:
         uses: UkHomeOffice/core-cloud-workflow-docker-actions/actions/setup@ccl-6431-docker
       
       - name: Build Docker Image
-        uses: UKHomeOffice/core-cloud-workflow-docker-actions/actions/setup@ccl-6431-docker
+        uses: UKHomeOffice/core-cloud-workflow-docker-actions/actions/build@ccl-6431-docker
         with:
           working_directory: ${{ inputs.working_directory }}
           dockerfile: ${{ inputs.working_directory }}/${{ inputs.dockerfile }}
@@ -50,6 +50,6 @@ jobs:
           tag_latest: ${{ inputs.tag_latest }}
       
       - name: Scan Docker Image with Trivy
-        uses: UKHomeOffice/core-cloud-workflow-docker-actions/actions/trivy@ccl-6431-docker
+        uses: UKHomeOffice/core-cloud-workflow-docker-actions/actions/scan@ccl-6431-docker
         with:
-          image: ${{ inputs.image_name }}:${{ inputs.image_tag }}
+          image: '${{ inputs.image_name }}:${{ inputs.image_tag }}'

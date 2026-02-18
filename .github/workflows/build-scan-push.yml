@@ -57,7 +57,7 @@ jobs:
           tag_latest: ${{ inputs.tag_latest }}
       
       - name: Scan Docker Image with Trivy
-        uses: UKHomeOffice/core-cloud-workflow-docker-actions/actions/trivy@ccl-6431-docker
+        uses: UKHomeOffice/core-cloud-workflow-docker-actions/actions/scan@ccl-6431-docker
         with:
           image: ${{ inputs.image_name }}:${{ inputs.image_tag }}
 
