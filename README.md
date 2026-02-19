@@ -40,6 +40,7 @@ jobs:
             image_name: "hello-world"
             image_tag: "latest"
             tag_latest: true
+        secrets:
             AWS_ECR_ACCOUNT_ID: ${{ secrets.AWS_ECR_ACCOUNT_ID }}
             ROLE_TO_ASSUME: ${{ secrets.ROLE_TO_ASSUME }}
 ```

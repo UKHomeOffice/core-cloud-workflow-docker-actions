@@ -51,7 +51,7 @@ jobs:
         uses: UKHomeOffice/core-cloud-workflow-docker-actions/actions/build@ccl-6431-docker
         with:
           working_directory: ${{ inputs.working_directory }}
-          dockerfile: ${{ inputs.dockerfile }}gg
+          dockerfile: ${{ inputs.dockerfile }}
           image_name: ${{ inputs.image_name }}
           image_tag: ${{ inputs.image_tag }}
           tag_latest: ${{ inputs.tag_latest }}
