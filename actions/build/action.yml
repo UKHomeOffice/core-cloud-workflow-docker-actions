@@ -57,6 +57,7 @@ runs:
         file: ${{ inputs.working_directory }}/${{ inputs.dockerfile }}
         push: false
         tags: ${{ steps.docker_meta.outputs.tags }}
+        load: true
     
     - name: Set docker build exit code
       id: docker_build_exit_code
