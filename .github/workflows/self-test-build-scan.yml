@@ -7,11 +7,10 @@ on:
     branches:
       - main
 
-permissions:
-  contents: read
-
 jobs:
   test-build-scan-workflow:
+    permissions:
+      contents: read
     uses: ./.github/workflows/build-scan.yml
     with:
       working_directory: "tests/valid-app"
@@ -21,6 +20,8 @@ jobs:
       tag_latest: false
   
   test-invalid-build:
+    permissions:
+      contents: read
     name: Test - Invalid docker build
     runs-on: ubuntu-latest
     steps:
@@ -43,6 +44,8 @@ jobs:
           fi
     
   test-invalid-scan:
+    permissions:
+      contents: read
     name: Test - Invalid docker scan
     runs-on: ubuntu-latest
     steps:
