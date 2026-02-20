@@ -74,8 +74,8 @@ runs:
           type=raw,value=${{ inputs.image_tag }}
           type=raw,value=latest,enable=${{ inputs.tag_latest }}
 
-    - name: Build image
-      id: docker_build
+    - name: Build image and push to ECR
+      id: docker_push
       uses: docker/build-push-action@v6
       with:
         context: .
@@ -87,5 +87,8 @@ runs:
       id: docker_push_exit_code
       shell: bash
       run: |
-        EXIT_CODE=$?
-        echo "exit_code=$EXIT_CODE" >> $GITHUB_OUTPUT
+        if [ "${{ steps.docker_push.conclusion }}" = "success" ]; then
+          echo "exit_code=0" >> $GITHUB_OUTPUT
+        else
+          echo "exit_code=1" >> $GITHUB_OUTPUT
+        fi
